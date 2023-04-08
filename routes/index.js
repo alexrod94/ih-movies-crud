@@ -40,32 +40,4 @@ router.get("/movies/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-// Delete a movie
-router.post("/movies/:id/delete", (req, res) => {
-  Movie.findByIdAndDelete(req.params.id)
-    .then((response) => {
-      res.render("action-completed");
-    })
-    .catch((err) => console.log(err));
-});
-
-// Show the edit form
-router.get("/movies/:id/edit", (req, res) => {
-  Movie.findById(req.params.id)
-    .then((movieFromDB) => {
-      res.render("edit-movie", { movie: movieFromDB });
-    })
-    .catch((err) => console.log(err));
-});
-
-// Edit the movie on the database
-router.post("/movies/:id/edit", (req, res) => {
-  const editedMovie = req.body;
-  Movie.findByIdAndUpdate(req.params.id, editedMovie)
-    .then((response) => {
-      res.render("action-completed");
-    })
-    .catch((err) => console.log(err));
-});
-
 module.exports = router;
